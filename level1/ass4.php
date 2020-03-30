@@ -46,7 +46,7 @@ function findInDb ($authInfo) {
     // response headers
     global $resHeaders;
 
-    $db = @file_get_contents('passwor3d.txt');
+    $db = @file_get_contents('password.txt');
 
     // if no such fil on directory
     if (!$db) {
