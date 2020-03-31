@@ -48,4 +48,4 @@ function processHttpGETRequest($method, $uri, $headers, $body) {
 }
 
 // TODO Commit for future includes in assignments. RECOMMIT IF NEED
-// processHttpRequest($http["method"], $http["uri"], $http["headers"], $http["body"]);
+// processHttpGETRequest($http["method"], $http["uri"], $http["headers"], $http["body"]);

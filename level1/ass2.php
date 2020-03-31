@@ -18,14 +18,19 @@ function readHttpLikeInput() {
     return $store;
 }
 
-// $contents = readHttpLikeInput();
+$contents = readHttpLikeInput();
 
-// auto input for development mode
-$contents = <<<STR
-GET /apolieshchuk/test.txt HTTP/1.1
-Host: student.shpp.me
-
-STR;
+// TODO auto input for development mode
+//$contents = <<<STR
+//POST /api/checkLoginAndPassword HTTP/1.1
+//Accept: */*
+//Content-Type: application/x-www-form-urlencoded
+//User-Agent: Mozilla/4.0
+//Content-Length: 35
+//
+//login=student&password=12345
+//
+//STR;
 
 function parseTcpStringAsHttpRequest($string) {
     /* Split main HTTP request */

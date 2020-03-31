@@ -1,5 +1,5 @@
 <?php
-require ('ass3.php');
+require ('../ass3.php');
 
 function processHttpRequest($method, $uri, $headers, $body) {
     /* CONTROLLER */
