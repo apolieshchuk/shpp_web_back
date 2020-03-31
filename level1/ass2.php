@@ -22,13 +22,8 @@ function readHttpLikeInput() {
 
 // auto input for development mode
 $contents = <<<STR
-POST /api/checkLoginAndPassword HTTP/1.1
-Accept: */*
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/4.0
-Content-Length: 35
-
-login=student&password=12345
+GET /apolieshchuk/test.txt HTTP/1.1
+Host: student.shpp.me
 
 STR;
 
@@ -46,7 +41,7 @@ function parseTcpStringAsHttpRequest($string) {
 
     /* Find headers */
     $headers = [];
-    for($i = 1; $i < $bodyStartIndex ? $bodyStartIndex : 0; $i++) {
+    for($i = 1; $i < ($bodyStartIndex ? $bodyStartIndex : count($splitRequest)); $i++) {
         $splitHeader = preg_split("/: /", $splitRequest[$i]);
 
         // by assignment:
@@ -69,5 +64,5 @@ function parseTcpStringAsHttpRequest($string) {
 $http = parseTcpStringAsHttpRequest($contents);
 
 // TODO Commit for future includes in assignments. RECOMMIT IF NEED
-//echo(json_encode($http, JSON_PRETTY_PRINT));
-//echo "\n";
+// echo(json_encode($http, JSON_PRETTY_PRINT));
+// echo "\n";

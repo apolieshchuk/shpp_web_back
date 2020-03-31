@@ -5,9 +5,9 @@ require ('ass2.php');
 $resHeaders = [
     "Date" => date('l jS \of F Y h:i:s A'),
     "Server" => 'Apache/2.2.14 (Win32)',
-    "Content-Length" => '',
     "Connection" => 'Closed',
     "Content-Type" => 'text/html; charset=utf-8',
+    "Content-Length" => '',
 ];
 
 function outputHttpResponse($statuscode, $statusmessage, $headers, $body) {
@@ -18,7 +18,7 @@ function outputHttpResponse($statuscode, $statusmessage, $headers, $body) {
 
 }
 
-function processHttpRequest($method, $uri, $headers, $body) {
+function processHttpGETRequest($method, $uri, $headers, $body) {
     /* CONTROLLER */
 
     // response headers
