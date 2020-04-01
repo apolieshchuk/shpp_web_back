@@ -10,7 +10,7 @@ function readHttpLikeInput() {
         $store .= preg_replace("/\r/", "", $line);
         if (preg_match('/Content-Length: (\d+)/',$line,$m))
             $toread=$m[1]*1;
-        if ($line == "\r\n" || $line == "\n")
+        if ($line == "\r\n")
             break;
     }
     if ($toread > 0)
@@ -18,19 +18,19 @@ function readHttpLikeInput() {
     return $store;
 }
 
-$contents = readHttpLikeInput();
+// $contents = readHttpLikeInput();
 
 // TODO auto input for development mode
-//$contents = <<<STR
-//POST /api/checkLoginAndPassword HTTP/1.1
-//Accept: */*
-//Content-Type: application/x-www-form-urlencoded
-//User-Agent: Mozilla/4.0
-//Content-Length: 35
-//
-//login=student&password=12345
-//
-//STR;
+$contents = <<<STR
+POST /api/checkLoginAndPassword HTTP/1.1
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/4.0
+Content-Length: 35
+
+login=student&password=12345
+
+STR;
 
 function parseTcpStringAsHttpRequest($string) {
     /* Split main HTTP request */
