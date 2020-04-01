@@ -1,7 +1,7 @@
 <?php
-require ('service.php');
-require ('errors.php');
-require ('headers.php');
+require('services.php');
+require('../errors.php');
+require('../headers.php');
 
 // check request method
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {

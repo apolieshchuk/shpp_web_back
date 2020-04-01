@@ -39,7 +39,7 @@ Vue.component("task", {
 	`
 });
 
-const url = "http://apolieshchuk.shpp/api/v1/";
+const url = "http://apolieshchuk.shpp/api/v1/tasks/";
 const site = "https://shpptodo.herokuapp.com/LoginToDo/login.html";
 let vue = new Vue({
 	el: '#app',

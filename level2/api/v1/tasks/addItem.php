@@ -1,7 +1,7 @@
 <?php
-require ('service.php');
-require ('headers.php');
-require ('errors.php');
+require('services.php');
+require('../headers.php');
+require('../errors.php');
 
 /* Read body from frontend */
 $body = getBody();
