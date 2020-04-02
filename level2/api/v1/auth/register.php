@@ -12,8 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // body validation
-if (!array_key_exists('login', $body)
-    || !array_key_exists('pass', $body)) {
+if (!isset($body['login']) || !isset($body['pass'])) {
 
     errorJSON(400);
 }

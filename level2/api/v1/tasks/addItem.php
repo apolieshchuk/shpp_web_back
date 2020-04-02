@@ -3,6 +3,9 @@ require('services.php');
 require('../headers.php');
 require('../errors.php');
 
+// check user auth
+if (!isAuth()) errorJSON(401);
+
 /* Read body from frontend */
 $body = getBody();
 
@@ -12,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // body validation
-if (!array_key_exists('text', $body)) {
+if (!isset($body['text'])) {
     errorJSON(400);
 }
 

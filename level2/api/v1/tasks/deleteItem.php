@@ -3,6 +3,9 @@ require('services.php');
 require('../headers.php');
 require('../errors.php');
 
+// check user auth
+if (!isAuth()) errorJSON(401);
+
 /* Read body from frontend */
 $body = getBody();
 
@@ -12,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
 }
 
 // body validation
-if (!array_key_exists('id', $body)) {
+if (!isset($body['id'])) {
     errorJSON(400);
 }
 

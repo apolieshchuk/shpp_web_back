@@ -40,7 +40,7 @@ Vue.component("task", {
 });
 
 const url = "http://apolieshchuk.shpp/api/v1/tasks/";
-const site = "https://shpptodo.herokuapp.com/LoginToDo/login.html";
+const site = "http://todo.local/LoginToDo/";
 let vue = new Vue({
 	el: '#app',
 	data: {
@@ -144,7 +144,7 @@ let vue = new Vue({
 			this.items[index].inputedit = '';
 		},
 		exit(){
-			fetch(url + 'logout.php', {
+			fetch('http://apolieshchuk.shpp/api/v1/auth/' + 'logout.php', {
 				method: 'POST',
 				credentials: 'include',
 			}).then(res => res.json())

@@ -3,6 +3,9 @@ require('services.php');
 require('../errors.php');
 require('../headers.php');
 
+// check user auth
+if (!isAuth()) errorJSON(401);
+
 /* Read body from frontend */
 $body = getBody();
 
@@ -12,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
 }
 
 // body validation
-if (!array_key_exists('id', $body)
-    || !array_key_exists('text', $body)
-    || !array_key_exists('checked', $body)) {
+if (!isset($body['id'])
+    || !isset($body['text'])
+    || !isset($body['checked'])) {
 
     errorJSON(400);
 }

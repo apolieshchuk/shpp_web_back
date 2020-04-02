@@ -15,3 +15,9 @@ function saveDatabase($db) {
 function getBody() {
     return json_decode(file_get_contents("php://input"),true);
 }
+
+/* Check user auth */
+function isAuth () {
+    session_start();
+    return isset($_SESSION['user']);
+}

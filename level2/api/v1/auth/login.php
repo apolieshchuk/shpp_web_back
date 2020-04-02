@@ -2,6 +2,7 @@
 require('services.php');
 require('../headers.php');
 require('../errors.php');
+session_start();
 
 /* Read body from frontend */
 $body = getBody();
@@ -12,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // body validation
-if (!array_key_exists('login', $body)
-    || !array_key_exists('pass', $body)) {
+if (!isset($body['login'])
+    || !isset($body['pass'])) {
 
     errorJSON(400);
 }
@@ -28,6 +29,9 @@ $db = openDatabase();
 /* Check user exists */
 foreach (array_slice($db, 1) as $user) {
     if ($user['login'] == $login && $user['pass'] == $pass) {
+        /* save user in session */
+        $_SESSION['user'] = $login;
+
         /* return json with OK */
         echo (json_encode(['ok' => true]));
         exit();

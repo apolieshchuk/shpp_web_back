@@ -3,6 +3,11 @@ require('services.php');
 require('../errors.php');
 require('../headers.php');
 
+// check user auth
+if (!isAuth()){
+    errorJSON(401);
+}
+
 // check request method
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     errorJSON(405);
