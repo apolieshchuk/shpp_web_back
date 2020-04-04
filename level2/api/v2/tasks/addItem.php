@@ -5,7 +5,7 @@ require('../errors.php');
 
 // check user auth
 session_start();
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     errorJSON(401);
 }
 
@@ -26,7 +26,7 @@ if (!isset($body['text'])) {
 $taskText= $body['text'];
 
 /* Open Mysql database */
-$db = new MyDbConnect();
+$db = new TasksService();
 
 /* Create new entry in db */
 $id = $db->addTask($taskText);

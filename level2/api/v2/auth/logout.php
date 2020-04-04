@@ -4,7 +4,10 @@ require('../headers.php');
 require('../errors.php');
 
 // check user auth
-if (!isAuth()) errorJSON(401);
+session_start();
+if (!isset($_SESSION['user'])) {
+    errorJSON(401);
+}
 
 // check request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

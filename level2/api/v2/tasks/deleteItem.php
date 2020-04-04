@@ -5,7 +5,7 @@ require('../errors.php');
 
 // check user auth
 session_start();
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     errorJSON(401);
 }
 
@@ -23,7 +23,7 @@ if (!isset($body['id'])) {
 }
 
 /* Open Mysql database */
-$db = new MyDbConnect();
+$db = new TasksService();
 
 /* Find needed id for remove */
 if (!$db->removeTask($body['id'])) {

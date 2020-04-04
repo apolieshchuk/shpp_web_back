@@ -4,7 +4,7 @@ require('../headers.php');
 require('../errors.php');
 
 /* Read body from frontend */
-$body = getBody();
+$body = json_decode(file_get_contents("php://input"),true);
 
 // check request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -13,34 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // body validation
 if (!isset($body['login']) || !isset($body['pass'])) {
-
     errorJSON(400);
 }
 
-/* Read json from frontend */
-$login = $body['login'];
-$pass = $body['pass'];
+/* Open Mysql-database */
+$db = new AuthService();
 
-/* Open json-database */
-$db = openDatabase();
-
-/* Check user exists */
-foreach (array_slice($db, 1) as $user) {
-    if ($user['login'] == $login) {
-        errorJSON(409);
-    }
+/* Create new user */
+if (!$db->createUser($body)) {
+    $duplicateErrorNo = 1062;
+    $db->lastErrorNo() == $duplicateErrorNo ? errorJSON(409) : errorJSON(500);
 }
 
-/* Create new entry and increase id in db */
-$user= array (
-    'id' => $db['id']++,
-    'login' => $login,
-    'pass' => $pass,
-);
-array_push($db, $user);
-
-/* save DB */
-saveDatabase($db);
+/* close DB*/
+$db->closeConnect();
 
 /* return json with OK */
 echo (json_encode(['ok' => true]));

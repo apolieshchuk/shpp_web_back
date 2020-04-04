@@ -1,7 +1,7 @@
 <?php
 require('../mysqli.php');
 
-class MyDbConnect {
+class TasksService {
     private $conn;
 
     function __construct() {

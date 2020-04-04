@@ -5,7 +5,7 @@ require('../headers.php');
 
 // check user auth
 session_start();
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     errorJSON(401);
 }
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 /* Open Mysql database */
-$db = new MyDbConnect();
+$db = new TasksService();
 
 /* Create Array for response */
 $items = array(

@@ -1,23 +1,52 @@
 <?php
+require('../mysqli.php');
 
-/* Open json-database */
-function openDatabase() {
-    $json = file_get_contents('db.json');
-    return json_decode($json, true);
-}
+class AuthService {
+    private $conn;
 
-/* save DB */
-function saveDatabase($db) {
-    file_put_contents('db.json', json_encode($db));
-}
+    function __construct() {
+        $this->conn = connectDb();
+    }
 
-/* Get body from request */
-function getBody() {
-    return json_decode(file_get_contents("php://input"),true);
-}
+    /* Create new user */
+    function createUser($payload) {
+        $login = $payload['login'];
+        $pass = $payload['pass'];
 
-/* Check user auth */
-function isAuth () {
-    session_start();
-    return isset($_SESSION['user']);
+        $sql = "INSERT INTO Users(login,pass) VALUES ('$login', '$pass')";
+        if (!mysqli_query($this->conn, $sql)) {
+            $this->logMySqlError($sql);
+            return false;
+        }
+
+        /* Return id */
+        return mysqli_insert_id($this->conn);
+    }
+
+    /* Check user existing */
+    function ifUserExists($payload) {
+        $login = $payload['login'];
+        $pass = $payload['pass'];
+
+        $sql = "SELECT * FROM Users WHERE login='$login' AND pass='$pass'";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result) != false;
+    }
+
+    /* Close db connect */
+    function closeConnect() {
+        $this->conn->close();
+    }
+
+    private function logMySqlError($sql) {
+        global $LOGFILE;
+        error_log(date('Y-m-d h:i:s') .
+            " Error: {$sql} \n" . mysqli_error($this->conn) . "\n",
+            3, $LOGFILE);
+    }
+
+    /* Return last error number of connection */
+    function lastErrorNo() {
+        return mysqli_errno($this->conn);
+    }
 }
