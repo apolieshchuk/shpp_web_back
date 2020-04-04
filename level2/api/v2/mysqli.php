@@ -44,7 +44,7 @@ function initDb($conn){  // TODO MIGRATIONS!
     $sql = "CREATE TABLE IF NOT EXISTS Users (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     login VARCHAR(30) NOT NULL UNIQUE,
-    pass VARCHAR(30) NOT NULL
+    pass VARCHAR(255) NOT NULL
     )";
     if ($conn->query($sql) === false) {
         error_log(date('Y-m-d h:i:s') .

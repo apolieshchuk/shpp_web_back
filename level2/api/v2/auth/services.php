@@ -1,5 +1,6 @@
 <?php
 require('../mysqli.php');
+require ('../env.php');
 
 class AuthService {
     private $conn;
@@ -11,7 +12,7 @@ class AuthService {
     /* Create new user */
     function createUser($payload) {
         $login = $payload['login'];
-        $pass = $payload['pass'];
+        $pass = password_hash($payload['pass'], PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO Users(login,pass) VALUES ('$login', '$pass')";
         if (!mysqli_query($this->conn, $sql)) {
@@ -26,11 +27,11 @@ class AuthService {
     /* Check user existing */
     function ifUserExists($payload) {
         $login = $payload['login'];
-        $pass = $payload['pass'];
 
-        $sql = "SELECT * FROM Users WHERE login='$login' AND pass='$pass'";
-        $result = mysqli_query($this->conn, $sql);
-        return mysqli_fetch_assoc($result) != false;
+        $sql = "SELECT * FROM Users WHERE login='$login'";
+        $user = mysqli_query($this->conn, $sql)->fetch_object();
+
+        return password_verify($payload['pass'], $user->pass);
     }
 
     /* Close db connect */

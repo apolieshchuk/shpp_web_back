@@ -26,8 +26,7 @@ if($db->ifUserExists($body)) {
     $_SESSION['user'] = $body['login'];
 
     /* return json with OK */
-    echo (json_encode(['ok' => true]));
-    exit();
+    die (json_encode(['ok' => true]));
 }
 
 errorJSON(401);

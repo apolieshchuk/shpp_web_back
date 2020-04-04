@@ -20,6 +20,5 @@ function errorJSON ($code) {
             $msg = 'Internal Server Error';
             break;
     }
-    echo (json_encode(['error' => $code . " " . $msg]));
-    exit();
+    die (json_encode(['error' => $code . " " . $msg]));
 }
