@@ -15,6 +15,12 @@ class MyDbConnect {
         if ($result) {
             $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
             $result->free();
+
+            /* Replace "checked" field on true/false value */
+            foreach ($array as $key => $value) {
+                $array[$key]['checked'] = $value['checked'] == 0 ? false : true;
+            }
+
             return $array;
         } else {
             $this->logMySqlError($sql);
