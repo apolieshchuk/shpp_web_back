@@ -8,9 +8,9 @@ class TasksService {
         $this->conn = connectDb();
     }
 
-    /* Get items from DB */
-    function getTasks() {
-        $sql = "SELECT * FROM Tasks";
+    /* Get items from DB by user*/
+    function getTasks($user) {
+        $sql = "SELECT * FROM Tasks WHERE userName='$user'";
         $result = mysqli_query($this->conn, $sql);
         if ($result) {
             $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -29,8 +29,8 @@ class TasksService {
     }
 
     /* add task in DB */
-    function addTask($task) {
-        $sql = "INSERT INTO Tasks(text) VALUES ('$task')";
+    function addTask($task, $user) {
+        $sql = "INSERT INTO Tasks(text, userName) VALUES ('$task', '$user')";
         if (!mysqli_query($this->conn, $sql)) {
             $this->logMySqlError($sql);
             return false;

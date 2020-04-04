@@ -31,6 +31,7 @@ function initDb($conn){  // TODO MIGRATIONS!
     /* Create table Tasks */
     $sql = "CREATE TABLE IF NOT EXISTS Tasks (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    userName VARCHAR(30) NOT NULL,
     text VARCHAR(30) NOT NULL,
     checked BOOLEAN DEFAULT 0 NOT NULL 
     )";

@@ -19,7 +19,7 @@ $db = new TasksService();
 
 /* Create Array for response */
 $items = array(
-    'items' => $db->getTasks()
+    'items' => $db->getTasks($_SESSION['user'])
 );
 
 /* close DB */

@@ -29,7 +29,7 @@ $taskText= $body['text'];
 $db = new TasksService();
 
 /* Create new entry in db */
-$id = $db->addTask($taskText);
+$id = $db->addTask($taskText, $_SESSION['user']);
 
 /* Check success creating */
 if (!$id) errorJSON(500);
