@@ -22,8 +22,8 @@
     </div>
 </div>
 <script>
-	const url = "http://apolieshchuk.shpp/api/v2/auth/";
-	const site = "http://todo.local/ToDov2/index.html";
+	const url = "http://apolieshchuk.shpp/index.php?action=";
+	const site = "http://todo.shpp/ToDov2/index.html";
 	let vue = new Vue({
 		el: '#app',
 		data: {
@@ -47,7 +47,7 @@
 							}
 					    }
 					};
-					xmlhttp.open("POST", url + 'login.php');
+					xmlhttp.open("POST", url + 'login');
 					xmlhttp.withCredentials = true;
 					xmlhttp.setRequestHeader("Content-Type", "application/json;");
 					xmlhttp.send(request);
@@ -55,7 +55,7 @@
 			register(){
 				if(this.nickName.trim() !== '' && this.pass.trim()) {
 				let request = JSON.stringify({login: this.nickName, pass: this.pass});
-				fetch(url + 'register.php', {
+				fetch(url + 'register', {
 					method: 'POST',
 					body: request,
 					headers: {

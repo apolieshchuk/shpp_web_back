@@ -1,6 +1,6 @@
 <?php
 require('../mysqli.php');
-require ('../env.php');
+
 
 class AuthService {
     private $conn;

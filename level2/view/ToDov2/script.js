@@ -39,8 +39,8 @@ Vue.component("task", {
 	`
 });
 
-const url = "http://apolieshchuk.shpp/api/v2/tasks/";
-const site = "http://todo.local/LoginToDo/";
+const url = "http://apolieshchuk.shpp/index.php?action=";
+const site = "http://todo.shpp/LoginToDo/";
 let vue = new Vue({
 	el: '#app',
 	data: {
@@ -56,7 +56,7 @@ let vue = new Vue({
 	},
 	methods: {
 		getItems: function(){
-			fetch(url + 'getItems.php', {credentials: 'include'})
+			fetch(url + 'getItems', {credentials: 'include'})
 				.then(res => res.json())
 				.then((response) => {
 					this.items = response.items.map((item) => {
@@ -67,7 +67,7 @@ let vue = new Vue({
 		},
 		getDelete: function(index){
 			let request = JSON.stringify({id: index, });
-			fetch(url + 'deleteItem.php', {
+			fetch(url + 'deleteItem', {
 				method: 'DELETE',
 				body: request,
 				credentials: 'include',
@@ -85,7 +85,7 @@ let vue = new Vue({
 		},
 		getPost: function(){
 			let request = JSON.stringify({text: this.new_task.text});
-			fetch(url + 'addItem.php', {
+			fetch(url + 'addItem', {
 				method: 'POST',
 				body: request,
 				credentials: 'include',
@@ -104,7 +104,7 @@ let vue = new Vue({
 		},
 		getPut: function(index, id){
 			let request = JSON.stringify({text: this.items[index].text, id: id,  checked: this.items[index].checked});
-			fetch(url + 'changeItem.php', {
+			fetch(url + 'changeItem', {
 				method: 'PUT',
 				body: request,
 				credentials: 'include',
@@ -144,7 +144,7 @@ let vue = new Vue({
 			this.items[index].inputedit = '';
 		},
 		exit(){
-			fetch('http://apolieshchuk.shpp/api/v1/auth/' + 'logout.php', {
+			fetch(url + 'logout', {
 				method: 'POST',
 				credentials: 'include',
 			}).then(res => res.json())
