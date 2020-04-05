@@ -2,8 +2,8 @@
 require ("env.php");
 
 function connectDb(){
-    global $USER, $PASSWORD, $DBHOST;
-    $conn = mysqli_connect($DBHOST, $USER, $PASSWORD);
+
+    $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
 
     initDb($conn);
 
@@ -11,22 +11,20 @@ function connectDb(){
 }
 
 function initDb($conn){  // TODO MIGRATIONS!
-    global $DBNAME, $LOGFILE;
-
     /* Check connect */
     if ($conn == false){
         error_log(date('Y-m-d h:i:s') .
-            " Error in MySQL connect\n " . mysqli_connect_error(), 3, $LOGFILE);
+            " Error in MySQL connect\n " . mysqli_connect_error(), 3, LOG_FILE);
     }
 
     /* Create database */
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS {$DBNAME};") == false) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS " . DB_NAME . ";") == false) {
         error_log(date('Y-m-d h:i:s') .
-            " Error creating database: {$conn->error} \n", 3, $LOGFILE);
+            " Error creating database: {$conn->error} \n", 3, LOG_FILE);
     }
 
     /* select db */
-    $conn->select_db($DBNAME);
+    $conn->select_db(DB_NAME);
 
     /* Create table Tasks */
     $sql = "CREATE TABLE IF NOT EXISTS Tasks (
@@ -37,7 +35,7 @@ function initDb($conn){  // TODO MIGRATIONS!
     )";
     if ($conn->query($sql) === false) {
         error_log(date('Y-m-d h:i:s') .
-            " Error creating table: {$conn->error} \n", 3, $LOGFILE);
+            " Error creating table: {$conn->error} \n", 3, LOG_FILE);
     }
 
     /* Create table Users */
@@ -48,7 +46,7 @@ function initDb($conn){  // TODO MIGRATIONS!
     )";
     if ($conn->query($sql) === false) {
         error_log(date('Y-m-d h:i:s') .
-            " Error creating table: {$conn->error} \n", 3, $LOGFILE);
+            " Error creating table: {$conn->error} \n", 3, LOG_FILE);
     }
 }
 

@@ -1,10 +1,13 @@
-Header always set Access-Control-Allow-Origin "http://todo.local"                   
-Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
-Header always set Access-Control-Allow-Headers "Content-Type,Origin,X-Requested-With,Accept,Authorization, Access-Control-Allow-Credentials"
-Header always set Access-Control-Allow-Credentials true
+<Directory "/home/apolieshchuk/Documents/xampp/htdocs/shpp/level2/">
+        Header always set Access-Control-Allow-Origin "http://todo.local"                   
+        Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+        Header always set Access-Control-Allow-Headers "Content-Type,Origin,X-Requested-With,Accept,Authorization, Access-Control-Allow-Credentials"
+        Header always set Access-Control-Allow-Credentials true
 
-RewriteEngine On                  
-RewriteCond %{REQUEST_METHOD} OPTIONS 
-RewriteRule ^(.*)$ $1 [R=200,L]    
 
-.htaccess
+        php_value date.timezone Europe/Kiev
+
+        RewriteEngine On                  
+        RewriteCond %{REQUEST_METHOD} OPTIONS 
+        RewriteRule ^(.*)$ $1 [R=200,L]    
+</Directory>

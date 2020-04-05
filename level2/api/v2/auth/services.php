@@ -40,10 +40,9 @@ class AuthService {
     }
 
     private function logMySqlError($sql) {
-        global $LOGFILE;
         error_log(date('Y-m-d h:i:s') .
             " Error: {$sql} \n" . mysqli_error($this->conn) . "\n",
-            3, $LOGFILE);
+            3, LOG_FILE);
     }
 
     /* Return last error number of connection */
