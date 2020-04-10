@@ -22,7 +22,7 @@ function readHttpLikeInput() {
 
 // TODO auto input for development mode
 $contents = <<<STR
-POST /api/checkLoginAndPassword HTTP/1.1
+POST /controller/checkLoginAndPassword HTTP/1.1
 Accept: */*
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/4.0

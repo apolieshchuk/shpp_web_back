@@ -8,7 +8,7 @@ function processHttpPostRequest($method, $uri, $headers, $body) {
     global $resHeaders;
 
     // if wrong uri
-    if ($uri !== "/api/checkLoginAndPassword"
+    if ($uri !== "/controller/checkLoginAndPassword"
         || $headers["Content-Type"] !== 'application/x-www-form-urlencoded'){
         $statusMsg = 'Not Found';
         $resHeaders["Content-Length"] = strlen($statusMsg);
