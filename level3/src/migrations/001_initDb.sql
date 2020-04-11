@@ -1,0 +1,19 @@
+# Create table Books
+CREATE TABLE IF NOT EXISTS Books (
+     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+     book VARCHAR(100) NOT NULL UNIQUE,
+     authors VARCHAR(255) NOT NULL,
+     year INT(4) UNSIGNED NOT NULL,
+     preview VARCHAR(100),
+     clicks INT(11) UNSIGNED DEFAULT 0 );
+
+# Create table Users
+CREATE TABLE IF NOT EXISTS Users (
+     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+     login VARCHAR(30) NOT NULL UNIQUE,
+     pass VARCHAR(255) NOT NULL );
+
+# Create table Migrations
+CREATE TABLE IF NOT EXISTS Migrations (
+     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+     migration VARCHAR(255) NOT NULL );

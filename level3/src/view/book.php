@@ -10,29 +10,29 @@
                                 <div data-book-author="{author}" class="author">{author}</div>
                             </div>
                         </a>
-              по состоянию здоровья          <a href="/book/{id}">
+                        <a href="/book/{id}">
                             <button type="button" class="details btn btn-success">Читать</button>
                         </a>
                     </div>
                 </div>
             </script>
-            <div id="id" book-id="22">
+            <div id="id" book-id="<?php echo $data['id'] ?>">
                 <div id="bookImg" class="col-xs-12 col-sm-3 col-md-3 item" style="
     margin:;
-"><img src="/assets/book-page/book-page_files/22.jpg" alt="Responsive image" class="img-responsive">
+"><img src="/assets/books-preview/<?php echo $data['preview'] ?>" alt="Responsive image" class="img-responsive">
 
                     <hr>
                 </div>
                 <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 info">
                     <div class="bookInfo col-md-12">
-                        <div id="title" class="titleBook">СИ++ И КОМПЬЮТЕРНАЯ ГРАФИКА</div>
+                        <div id="title" class="titleBook"><?php echo $data['book'] ?></div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="bookLastInfo">
-                            <div class="bookRow"><span class="properties">автор:</span><span id="author">Андрей Богуславский</span></div>
-                            <div class="bookRow"><span class="properties">год:</span><span id="year">2003</span></div>
-                            <div class="bookRow"><span class="properties">страниц:</span><span id="pages">351</span></div>
-                            <div class="bookRow"><span class="properties">isbn:</span><span id="isbn"></span></div>
+                            <div class="bookRow"><span class="properties">автор: </span><span id="author"><?php echo $data['authors'] ?></span></div>
+                            <div class="bookRow"><span class="properties">год: </span><span id="year"><?php echo $data['year'] ?></span></div>
+                            <div class="bookRow"><span class="properties">страниц: </span><span id="pages">999</span></div>
+                            <div class="bookRow"><span class="properties">isbn: </span><span id="isbn"></span></div>
                         </div>
                     </div>
                     <div class="btnBlock col-xs-12 col-sm-12 col-md-12">
@@ -41,16 +41,16 @@
                     <div class="bookDescription col-xs-12 col-sm-12 col-md-12 hidden-xs hidden-sm">
                         <h4>О книге</h4>
                         <hr>
-                        <p id="description">Лекции и практикум по программированию на Си++</p>
+                        <p id="description">Some Description</p>
                     </div>
                 </div>
                 <div class="bookDescription col-xs-12 col-sm-12 col-md-12 hidden-md hidden-lg">
                     <h4>О книге</h4>
                     <hr>
-                    <p class="description">Лекции и практикум по программированию на Си++</p>
+                    <p class="description">Some Description 2</p>
                 </div>
             </div>
-            <script src="book-page_files/book.js" defer=""></script>
+            <script src="/assets/book-page/book-page_files/book.js" defer=""></script>
         </div>
     </div>
 </section>
