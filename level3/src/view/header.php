@@ -14,7 +14,7 @@
                                     $("#search").bind("keypress", function (e) {
                                         if (e.keyCode == 13) {
                                             e.preventDefault();
-                                            alert("а вот это придется сделать самому. Ваш @rshmelev");
+                                            window.location=`/books/search?str=${e.target['value']}`;
                                         }
                                     })
                                 </script>

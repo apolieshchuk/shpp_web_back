@@ -35,7 +35,15 @@ class Migrations {
         // Compare migrations and return all that not up
         $stmt = $this->conn->query("SELECT migration FROM Migrations");
         $upMigrations = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        return array_diff($allMigrations, $upMigrations);
+
+        $needMigrations = array();
+        foreach ($allMigrations as $file) {
+            if (!in_array(basename($file), $upMigrations)) {
+                array_push($needMigrations, $file);
+            }
+        }
+
+        return $needMigrations;
 
     }
 

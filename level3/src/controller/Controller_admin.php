@@ -12,7 +12,6 @@ class Controller_admin extends Controller {
     }
 
     public function addBook() {
-
         $id = $this->model->addBook($_POST);
 
         $preview = $this->uploadPreview($id);
@@ -21,10 +20,19 @@ class Controller_admin extends Controller {
 
         if(!$id) Server::errCode(500);
 
-        print_r ($_FILES['image']);
+        Server::redirect('/admin');
+    }
 
+    public function deleteBook() {
+        if (!isset($_GET['id'])) {
+            Server::errCode(400);
+        }
 
-        Server::redirect('http://'.$_SERVER['HTTP_HOST'].'/admin');
+        $isDeleted = $this->model->deleteBook($_GET['id']);
+
+        if(!$isDeleted) Server::errCode(500);
+
+        Server::redirect('/admin');
     }
 
     private function uploadPreview($id) {

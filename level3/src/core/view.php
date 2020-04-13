@@ -10,6 +10,5 @@ class View {
             default:
                 require SRC_PATH . 'view/main.php';
         }
-
     }
 }

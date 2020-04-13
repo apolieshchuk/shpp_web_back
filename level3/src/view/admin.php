@@ -11,6 +11,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" crossorigin="anonymous"/>
 </head>
 <body style="padding: 20px" data-gr-c-s-loaded="true" class="">
+    <script>
+        function logout() {
+            $.ajax({
+                type: "GET",
+                url: "/admin",
+                async: false,
+                username: "logmeout",
+                password: "123456",
+                headers: { "Authorization": "Basic xxx" }
+            })
+                .done(function(){
+                })
+                .fail(function(){
+                    window.location = "/";
+                });
+
+            return false;
+        }
+    </script>
+    <div style="text-align: end; margin-bottom: 20px;" ><a href="#" onclick="logout()">Logout</a></div>
+
     <div style="display: flex">
         <table style="width: 700px"
                id="table"
@@ -36,14 +57,17 @@
                 <td><?php echo $book['book'] ?></td>
                 <td><?php echo $book['authors'] ?></td>
                 <td><?php echo $book['year'] ?></td>
-                <td>Dummy</td>
+
+                <td><a href="/admin/deleteBook/?id=<?php echo $book['id'] ?>"
+                    onclick="return confirm('Delete book?')"
+                    >delete</a></td>
                 <td><?php echo $book['clicks'] ?></td>
             </tr>
             <? endforeach; ?>
             </tbody>
         </table>
         <div style="margin-left: 20px; width: 5px; background-color: #007bff"></div>
-        <form style="margin-left: 20px; display: flex; flex-direction: column" method="POST" action="/admin" enctype="multipart/form-data">
+        <form style="margin-left: 20px; display: flex; flex-direction: column" method="POST" action="/admin/addBook" enctype="multipart/form-data">
             <p style='align-self: center'> Add new Book </p>
             <div style="display: flex">
                 <div style="margin-right: 20px">

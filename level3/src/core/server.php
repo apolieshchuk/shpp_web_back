@@ -30,7 +30,9 @@ class Server {
         die ("{$code} {$msg}");
     }
 
-    public static function redirect ($url) {
-        header("Location: {$url}",true, 301);
+    public static function redirect ($path) {
+        $url = 'http://'.$_SERVER['HTTP_HOST'].$path;
+        header("Location: {$url}",true, 302);
+        die();
     }
 }

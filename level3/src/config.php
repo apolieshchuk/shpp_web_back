@@ -4,8 +4,8 @@ define('DB_PASSWORD', '123456');
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'shpp');
 define('FIRST_DB_INIT', false);
-define('HOME_PAGE', 'http://'.$_SERVER['HTTP_HOST'].'/');
-define('SRC_PATH', __DIR__.'/');
+define('SRC_PATH', __DIR__ . '/');
+define('DEFAULT_OFFSET', 20);
 
 // path to mysql
 $pathMysql = '/opt/lampp/bin/mysql';

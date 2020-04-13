@@ -49,6 +49,9 @@ var bookId;
 // });
 /*------------------ Sending email by clicking on the button ----------------*/
 $('.btnBookID').click(function(event) {
+    const clickedBookId = event.target.id.split('-')[1];
+    $.ajax(`/books/click/?id=${clickedBookId}`);
+    // console.log($clickedBookId);
     // var email = $('.orderEmail').val();
     // var isEmail = controller.validateEmail(email);
     // if (isEmail) {
@@ -72,7 +75,7 @@ $('.btnBookID').click(function(event) {
             " не попасть в неловкую ситуацию. Тел. 099 196 24 69"+
             " \n\n"+
             "******************\n"+
-            "Кстати, если вы читаете этот текст, то автор сайта еще не отсылает ajax запрос на увеличение количества кликов на кнопку по этой книге"
+            "Счетчик кликов увеличен"
         );
     }
 });

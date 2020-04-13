@@ -10,7 +10,7 @@ class Model_admin extends Model {
     public function getBooks () {
         require 'Model_books.php';
         $model = new Model_books();
-        return $model->getBooks();
+        return $model->getNBooks();
     }
 
     public function addBook ($payload) {
@@ -24,6 +24,18 @@ class Model_admin extends Model {
                 ':preview' => $payload['preview']
             ));
             return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function deleteBook ($id) {
+        $sql = "DELETE FROM Books WHERE id=:id";
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return true;
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;

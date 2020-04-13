@@ -3,41 +3,68 @@
 class Router {
 
     public static function run() {
-        $component = 'books';
-        $action = 'index';
 
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $request = parse_url($_SERVER['REQUEST_URI']);
+        $path = explode('/', $request['path']);
+
+        // default values
+        $route = $path[1];
+        $action = (count($path) < 3
+                || $path[2] === '') ? 'index' : $path[2];
 
         // get component
-        switch ($routes[1] ) {
+        switch ($route) {
             case 'admin':
-                $component = 'admin';
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $action = 'addBook';
+                Auth::isAuth();
+                switch ($action) {
+                    case 'index':
+                        break;
+                    case 'addBook':
+                        // check method
+                        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+                            Server::errCode(405);
+                        }
+                        $action = 'addBook';
+                        break;
+                    case 'deleteBook':
+                        $action = 'deleteBook';
+                        break;
+                    default:
+                        Server::errCode(404);
                 }
-                break;
-            case 'auth':
-                $component = 'auth';
                 break;
             case 'books':
-                if ($routes[2] == 'book') {
-                    $action = 'getBook';
-                    break;
+                switch ($action) {
+                    case 'index':
+                        Server::redirect('/');
+                        break;
+                    case 'book':
+                        $action = 'getBook';
+                        break;
+                    case 'click':
+                        $action = 'clickBook';
+                        break;
+                    case 'search':
+                        break;
+                    default:
+                        Server::errCode(404);
                 }
-                Server::redirect(HOME_PAGE);
                 break;
             case '':
-                $component = 'books';
+                if(!isset($_GET['offset'])){
+                    $_GET['offset'] = DEFAULT_OFFSET;
+                }
+                $route = 'books';
                 break;
             default:
                 Server::errCode(404);
         }
 
         // bind model
-        Router::bindModel($component);
+        Router::bindModel($route);
 
         // bind controller
-        $controller = Router::bindController($component);
+        $controller = Router::bindController($route);
 
         // do action
         if (method_exists($controller, $action)) {
@@ -47,16 +74,17 @@ class Router {
         }
     }
 
-    private static function bindController ($component) {
-        $controller_name = 'Controller_'.strtolower($component);
+
+    private static function bindController ($route) {
+        $controller_name = 'Controller_'.strtolower($route);
         $controller_file = $controller_name .'.php';
         $controller_path = SRC_PATH . 'controller/'. $controller_file;
         require $controller_path;
         return new $controller_name;
     }
 
-    private static function bindModel ($component) {
-        $model_name = 'Model_'.strtolower($component);
+    private static function bindModel ($route) {
+        $model_name = 'Model_'.strtolower($route);
         $model_file = $model_name .'.php';
         $model_path = SRC_PATH . 'model/'. $model_file;
         if(file_exists($model_path)) {
@@ -64,5 +92,16 @@ class Router {
         }
     }
 
+    private static function parseUrl ($url) {
+        // 192.168.0.1/books/
+        // 192.168.0.1/admin/addBook
+        // 192.168.0.1/books
+        // 192.168.0.1/books?foo=bar
+        // 192.168.0.1/?foo=bar
+        $url = explode('/', $_SERVER['REQUEST_URI']);
+
+
+
+    }
 
 }
