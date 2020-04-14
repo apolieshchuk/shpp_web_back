@@ -44,13 +44,13 @@ class Migrations {
         }
 
         return $needMigrations;
-
     }
 
     private function migrate($file) {
+        $sqlFile = file_get_contents($file);
+
         // up migration
-        $command = MYSQL_SHELL_CONNECT . '<' . $file;
-        shell_exec($command);
+        $this->conn->exec($sqlFile);
 
         // add migration into table versions
         $stmt = $this->conn->prepare("INSERT INTO Migrations(migration) VALUES (:fileName)");
