@@ -19,7 +19,7 @@
                                     })
                                 </script>
 
-                                <div class="loader"><img src="<?php echo PROJ_PATH.'assets/books-page/'?>books-page_files/loading.gif"></div>
+                                <div class="loader"><img src="<?php echo SRC_PATH.'assets/books-page/'?>books-page_files/loading.gif"></div>
                                 <div id="list" size="" class="bAutoComplete mSearchAutoComplete"></div>
                             </div>
                         </form>

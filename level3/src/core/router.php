@@ -3,7 +3,6 @@
 class Router {
 
     public static function run() {
-
         $request = parse_url($_SERVER['REQUEST_URI']);
         $path = explode('/', $request['path']);
 
@@ -60,6 +59,7 @@ class Router {
                 Server::errCode(404);
         }
 
+
         // bind model
         Router::bindModel($route);
 
@@ -90,18 +90,6 @@ class Router {
         if(file_exists($model_path)) {
             require $model_path;
         }
-    }
-
-    private static function parseUrl ($url) {
-        // 192.168.0.1/books/
-        // 192.168.0.1/admin/addBook
-        // 192.168.0.1/books
-        // 192.168.0.1/books?foo=bar
-        // 192.168.0.1/?foo=bar
-        $url = explode('/', $_SERVER['REQUEST_URI']);
-
-
-
     }
 
 }

@@ -10,7 +10,8 @@ class Model_admin extends Model {
     public function getBooks () {
         require 'Model_books.php';
         $model = new Model_books();
-        return $model->getNBooks();
+        $totalBooks = $model->countBooks();
+        return $model->getNBooks($totalBooks);
     }
 
     public function addBook ($payload) {

@@ -2,8 +2,14 @@
 
 class Controller_books extends Controller {
 
+    private $data;
+
     public function __construct() {
         $this->model = new Model_books();
+        $data = array(
+            'books' => [],
+            'totalBooks' => 0,
+        );
     }
 
     public function index() {
@@ -14,13 +20,9 @@ class Controller_books extends Controller {
             Server::errCode(400);
         }
 
-        $totalBooks = $this->model->countBooks();
-        $booksWithOffset = $this->model->getNBooks($_GET['offset']);
-        $data = array(
-            'books' => $booksWithOffset,
-            'totalBooks' => $totalBooks
-        );
-        View::render('books.php', $data);
+        $this->data['totalBooks'] = $this->model->countBooks();
+        $this->data['books'] = $this->model->getNBooks($_GET['offset']);
+        View::render('books.php', $this->data);
     }
 
     public function getBook() {
@@ -45,11 +47,11 @@ class Controller_books extends Controller {
         if(!$this->model->clickBook($_GET['id'])){
             Server::errCode(500);
         };
-
     }
 
     public function search() {
-        $data = $this->model->search($_GET['str']);
-        View::render('books.php', $data);
+        $this->data['books'] = $this->model->search($_GET['str']);
+        $this->data['totalBooks'] = count($this->data['books']);
+        View::render('books.php', $this->data);
     }
 }
