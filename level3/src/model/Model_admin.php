@@ -32,7 +32,10 @@ class Model_admin extends Model {
     }
 
     public function deleteBook ($id) {
-        $sql = "DELETE FROM Books WHERE id=:id";
+        // $sql = "DELETE FROM Books WHERE id=:id";
+        $sql = "UPDATE Books 
+                SET isDeleted=1, deletedTTL=(CURRENT_TIMESTAMP + INTERVAL 1 minute)
+                WHERE id=:id";
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id'=>$id]);
@@ -44,7 +47,7 @@ class Model_admin extends Model {
     }
 
     public function setPreview ($id, $preview) {
-        $sql = "UPDATE Books SET preview=:preview WHERE id=:id";
+        $sql = "UPDATE Books SET preview=:preview WHERE id=:id AND isDeleted=0";
         try {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':preview' => $preview, ':id' => $id]);
