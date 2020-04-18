@@ -1,7 +1,7 @@
 # Create table authors
 CREATE TABLE IF NOT EXISTS Authors(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    author VARCHAR(255) UNIQUE NOT NULL
+    authors VARCHAR(255) UNIQUE NOT NULL
 );
 
 # Insert authors from table books in table authors
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS BookWithAuthor(
       authorId INT(6) DEFAULT 0
 );
 
-# Create books id
-INSERT IGNORE INTO BookWithAuthor (bookId) SELECT id FROM Books;
-
 # Connect books id to author id
+INSERT IGNORE INTO BookWithAuthor (bookId, authorId)
+SELECT Books.id, Authors.id FROM Authors JOIN Books
+WHERE Authors.authors = Books.authors;
