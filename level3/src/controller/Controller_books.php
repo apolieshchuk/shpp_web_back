@@ -22,7 +22,7 @@ class Controller_books extends Controller {
 
         $this->data['totalBooks'] = $this->model->countBooks();
         $this->data['books'] = $this->model->getNBooks($_GET['offset']);
-        View::render('books.php', $this->data);
+        View::render('books.blade.php', $this->data);
     }
 
     public function getBook() {
@@ -35,7 +35,7 @@ class Controller_books extends Controller {
         if (!$book[0]) {
             Server::redirect('/');
         }
-        View::render('book.php', $book[0]);
+        View::render('book.blade.php', $book[0]);
     }
 
     public function clickBook() {
@@ -52,6 +52,6 @@ class Controller_books extends Controller {
     public function search() {
         $this->data['books'] = $this->model->search($_GET['str']);
         $this->data['totalBooks'] = count($this->data['books']);
-        View::render('books.php', $this->data);
+        View::render('books.blade.php', $this->data);
     }
 }

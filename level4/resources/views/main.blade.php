@@ -23,10 +23,9 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body data-gr-c-s-loaded="true" class="">
-<?php
-    require __DIR__.'/header.php';
-    require __DIR__.'/'.$url;
-    require __DIR__.'/footer.php';
-?>
+
+@include('header')
+@yield('content')
+@include('footer')
 </body>
 </html>
